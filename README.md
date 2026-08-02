@@ -1,1 +1,1 @@
-chenthurr-ck-portfolio.netlify.app
+chenthurrck-portfolio.netlify.app
