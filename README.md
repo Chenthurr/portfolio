@@ -1,55 +1,111 @@
-# Chenthurr C K — AI/ML Engineer Portfolio
+# Chenthurr C K — AI / ML Engineer Portfolio
 
-A premium, interactive personal portfolio website built with React + Vite + Tailwind CSS.
-100% frontend — no backend required. Designed to deploy directly to Netlify.
+> Personal portfolio showcasing my work in Artificial Intelligence, Machine Learning, Computer Vision, Data Engineering, and full-stack development.
 
-## Theme Colors
-- **Dominant (60%)** `#0B0F19` — Midnight Blue background
-- **Secondary (30%)** `#E2E8F0` — Cool Gray text
-- **Accent (10%)** `#38BDF8` — Sky Cyan highlights & interactive elements
+## 🌐 Portfolio
 
-## Setup
+**Live Portfolio:** urlhttps://chenthurr.netlify.apphttps://chenthurr.netlify.app
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Run development server:
-   ```bash
-   npm run dev
-   ```
-3. Build for production:
-   ```bash
-   npm run build
-   ```
-4. Deploy the `dist` folder to Netlify (or connect the repo — `netlify.toml` is already
-   configured with the correct build command, publish directory, and SPA redirect rule
-   so client-side routes like `/projects` or `/admin` don't 404 on refresh).
+**GitHub Repository:** urlhttps://github.com/Chenthurr/portfoliohttps://github.com/Chenthurr/portfolio
 
-## Admin Panel
-- Navigate to `/admin`
-- Primary passkey: `Chen@1234#`
-- Change the password anytime from Admin → Change Password
-- Every section (Profile, About, Projects, Skills, Experience, Achievements,
-  Certifications, Resume, Social Links, Site Settings) is editable from the panel
-- All content is stored in the browser's localStorage — no database, no server
-- Use Import/Export to back up or migrate your data (exports a JSON file)
+## About
 
-## Portrait
-- Default portrait lives at `public/assets/chenthurr-portrait.jpg`
-- Replace it anytime from Admin → Profile Image (drag/drop a new image — stored
-  locally in the browser, overriding the default)
+I am Chenthurr C K, a B.Tech Artificial Intelligence & Data Science student focused on building practical, production-oriented intelligent systems. My interests include machine learning, computer vision, data engineering, and full-stack AI applications.
 
-## Resume
-- The Resume page links out to your Google Drive folder by default
-  (editable at Admin → Site Settings → "Resume Google Drive Link")
-- For a true inline PDF preview + one-click download, upload the actual PDF file
-  from Admin → Resume — it's stored as a local data URL, still 100% frontend
+This portfolio presents selected projects, technical skills, professional experience, achievements, certifications, education, and resume information.
 
-## Features
-- Custom cursor themed to the site's Sky Cyan accent
-- Dedicated pages: Home, About, Projects, Skills, Experience, Achievements,
-  Certifications, Resume, Contact
-- Project filtering and detail modals
-- Full admin content management with a changeable passkey
-- Fully responsive, keyboard accessible, reduced motion support
+## Featured Work
+
+- **Real-Time Computer Vision Queue Management System** — real-time people detection, ROI analysis, tracking, and queue counting using YOLOv8 and OpenCV.
+- **Loan Approval Prediction** — end-to-end machine learning pipeline covering preprocessing, feature engineering, model training, tuning, and cross-validation.
+- **AI Venture Analyst** — AI-assisted analytical workflow for insights and decision support.
+- **PyDebugger** — CLI-based Python debugging utility for runtime error detection, classification, and logging.
+
+## Experience
+
+- **Data Science Intern — GrowYourSkills** | Jun 2025 — Jul 2025
+- **Core Python Trainee — VEI Technologies** | Jan 2026 — Feb 2026
+
+## Tech Stack
+
+**Languages:** Python, Java, SQL  
+**AI / ML:** Scikit-learn, TensorFlow, OpenCV, YOLOv8, Pandas, NumPy  
+**Web Development:** React.js, FastAPI, HTML, CSS, JavaScript, MongoDB  
+**Tools & Visualization:** Git, GitHub, Power BI, Matplotlib
+
+## Run Locally
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/Chenthurr/portfolio.git
+cd portfolio
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+The development server will provide a local URL in the terminal.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Portfolio Features
+
+- Responsive React + Vite portfolio
+- Dedicated pages for projects, skills, experience, achievements, certifications, resume, and contact
+- Project filtering and detailed project views
+- Interactive navigation and custom cursor
+- Browser-based content management through the admin panel
+- LocalStorage-based content persistence
+- Tailwind CSS styling
+- Netlify deployment configuration
+
+## Project Structure
+
+```text
+portfolio/
+├── public/
+│   └── assets/
+├── src/
+│   ├── components/
+│   ├── data/
+│   ├── hooks/
+│   ├── pages/
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── netlify.toml
+├── package.json
+└── vite.config.js
+```
+
+## Contact
+
+For professional opportunities, collaborations, or project discussions, please connect through the contact details available on the portfolio.
+
+- **GitHub:** urlChenthurrhttps://github.com/Chenthurr
+- **LinkedIn:** urlChenthurr C K on LinkedInhttps://linkedin.com/in/chenthurr-c-k-901ab0289/
+
+## License
+
+This repository contains my personal portfolio and project presentation. Please do not reproduce the portfolio design, personal information, or content as your own.
