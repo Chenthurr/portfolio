@@ -4,9 +4,9 @@
 
 ## 🌐 Portfolio
 
-**Live Portfolio:** urlhttps://chenthurr.netlify.apphttps://chenthurr.netlify.app
+**Live Portfolio:** chenthurrck-portfolio.netlify.app
 
-**GitHub Repository:** urlhttps://github.com/Chenthurr/portfoliohttps://github.com/Chenthurr/portfolio
+**GitHub Repository:** (https://github.com/Chenthurr/portfolio?utm_source=chatgpt.com)
 
 ## About
 
