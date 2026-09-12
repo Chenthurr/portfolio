@@ -180,7 +180,7 @@ export const initialExperience = [
   {
     id: "exp-1",
     role: "DATA SCIENCE INTERN",
-    company: "CAZBRAIN",
+    company: "GROWYOURSKILLS",
     dates: "Jun 2025 — Jul 2025",
     achievements: [
       "Developed Loan Approval Prediction model",
@@ -268,8 +268,5 @@ export const initialSettings = {
   siteTitle: "Chenthurr C K — AI / ML Engineer",
   siteDescription: "Portfolio of Chenthurr C K, AI/ML Engineer specializing in machine learning, computer vision, and data engineering.",
   footerText: "© 2026 CHENTHURR C K",
-  // Google Drive link for the resume. Works as a "view/download" link out of the box.
-  // For an inline PDF preview instead of an external link, use the Admin > Resume tab
-  // to upload the PDF directly (it's stored entirely in the browser, no backend needed).
   resumeDriveUrl: "https://drive.google.com/drive/folders/1F9NFl2CWvCKSrgtvtvg-GfPRT6uDbKBF?usp=drive_link",
 };
