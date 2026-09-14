@@ -28,7 +28,7 @@ This portfolio presents selected projects, technical skills, professional experi
 
 ## Tech Stack
 
-**Languages:** Python, Java, SQL  
+**Languages:** Python, Java, MySQL  
 **AI / ML:** Scikit-learn, TensorFlow, OpenCV, YOLOv8, Pandas, NumPy  
 **Web Development:** React.js, FastAPI, HTML, CSS, JavaScript, MongoDB  
 **Tools & Visualization:** Git, GitHub, Power BI, Matplotlib
