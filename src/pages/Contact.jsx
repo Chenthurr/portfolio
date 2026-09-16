@@ -1,46 +1,8 @@
 import { useData } from '../components/DataContext';
+import SectionHeading from '../components/SectionHeading';
 
 export default function Contact() {
   const { profile } = useData();
-
-  return (
-    <div className="pt-24 pb-20 bg-navy min-h-screen text-cream">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">HAVE A PROBLEM WORTH SOLVING?</h1>
-          <p className="text-xl text-cream/60">Let's build the system behind it.</p>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href={`mailto:${profile.email}`}
-            className="px-8 py-4 bg-mustard text-navy font-bold text-sm tracking-wide hover:bg-mustard-dark transition-colors"
-          >
-            EMAIL ME
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 border-2 border-cream text-cream font-bold text-sm tracking-wide hover:bg-cream hover:text-navy transition-colors"
-          >
-            GITHUB
-          </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 border-2 border-cream text-cream font-bold text-sm tracking-wide hover:bg-cream hover:text-navy transition-colors"
-          >
-            LINKEDIN
-          </a>
-        </div>
-
-        <div className="mt-16 font-mono text-xs text-cream/40">
-          <p>{profile.email}</p>
-          <p className="mt-2">{profile.location}</p>
-        </div>
-      </div>
-    </div>
-  );
+  const channels = [{ label: 'EMAIL', value: profile.email, href: `mailto:${profile.email}` }, { label: 'GITHUB', value: 'Chenthurr', href: profile.github }, { label: 'LINKEDIN', value: 'PROFILE', href: profile.linkedin }];
+  return <div className="page"><div className="container-wide"><SectionHeading index={8} eyebrow="SEND A TRANSMISSION" title="CONTACT" description="Every voyage begins with a message. Reach out through the channels below." /><div className="grid lg:grid-cols-[1.1fr_.9fr] gap-6"><div className="dark-panel p-7 sm:p-10 relative overflow-hidden"><div className="absolute -right-16 -top-16 w-48 h-48 rounded-full border border-white/10" /><div className="absolute -right-6 -top-6 w-28 h-28 rounded-full border border-white/10" /><p className="font-mono text-xs tracking-[.16em] text-[var(--accent)]">TRANSMISSION CHANNEL / OPEN</p><h2 className="mt-6 text-3xl sm:text-5xl font-black">LET'S BUILD SOMETHING INTELLIGENT.</h2><p className="mt-5 max-w-xl text-white/65 leading-7">For collaboration, engineering conversations, or opportunities, send a direct signal.</p><a href={`mailto:${profile.email}`} className="btn-primary mt-8">Send Email ↗</a></div><div className="grid gap-3">{channels.map((channel) => <a key={channel.label} href={channel.href} target={channel.label === 'EMAIL' ? undefined : '_blank'} rel="noopener noreferrer" className="paper-card p-6 group hover:border-[var(--primary)] transition-colors"><p className="eyebrow">{channel.label}</p><p className="font-black text-lg group-hover:text-[var(--primary)]">{channel.value} ↗</p></a>)}<div className="paper-card p-6"><p className="eyebrow">LOCATION</p><p className="font-black">{profile.location}</p></div></div></div></div></div>;
 }
