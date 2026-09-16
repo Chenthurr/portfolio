@@ -1,182 +1,77 @@
 import { Link } from 'react-router-dom';
 import { useData } from '../components/DataContext';
-import { useEffect, useRef } from 'react';
+
+function WantedPoster({ profile, portraitSrc }) {
+  return (
+    <div className="paper-card p-3 sm:p-4 rotate-[1deg] shadow-2xl">
+      <div className="border-2 border-[var(--text)]/15 p-2 relative">
+        <div className="absolute top-3 left-3 right-3 flex justify-between font-mono text-[9px] font-bold tracking-[.18em] text-[var(--primary)]"><span>WANTED</span><span>PROFILE 001</span></div>
+        <div className="mt-8 aspect-[4/5] overflow-hidden bg-[var(--bg)]">
+          <img src={portraitSrc} alt="Portrait of Chenthurr C K" className="w-full h-full object-cover object-top" onError={(e) => { e.currentTarget.style.display='none'; }} />
+        </div>
+        <div className="pt-4 pb-2 text-center">
+          <p className="font-black text-2xl sm:text-3xl tracking-tight">{profile.name}</p>
+          <p className="mt-1 font-mono text-[10px] font-bold tracking-[.15em] text-[var(--primary)]">{profile.title}</p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 border-t border-[var(--border)] pt-3 font-mono text-[9px] leading-4">
+          <span><b>LOCATION</b><br />{profile.location}</span><span><b>SPECIALTY</b><br />AI · DATA · VISION</span>
+          <span><b>STATUS</b><br />BUILDING</span><span><b>COORD.</b><br />11°N / 78°E</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
-  const { profile, portraitDataUrl } = useData();
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    const els = heroRef.current?.querySelectorAll('.reveal');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
+  const { profile, projects, portraitDataUrl } = useData();
   const portraitSrc = portraitDataUrl || profile.portrait;
-
+  const featured = projects.filter((p) => p.published && p.featured);
   return (
-    <div ref={heroRef}>
-      {/* HERO SECTION */}
-      <section className="min-h-screen bg-navy flex items-center pt-20">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT: Text */}
-            <div className="order-2 lg:order-1">
-              <div className="reveal opacity-0 mb-4">
-                <span className="text-mustard font-mono text-xs tracking-widest">AI / ML ENGINEER</span>
-              </div>
-              <h1 className="reveal opacity-0 text-4xl md:text-5xl lg:text-6xl font-bold text-cream leading-tight mb-6">
-                {profile.headline}
-              </h1>
-              <p className="reveal opacity-0 text-cream/80 text-lg mb-8 max-w-lg">
-                {profile.subheadline}
-              </p>
-              <div className="reveal opacity-0 flex flex-wrap gap-4">
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center px-6 py-3 bg-mustard text-navy font-semibold text-sm tracking-wide hover:bg-mustard-dark transition-colors"
-                >
-                  EXPLORE MY WORK
-                </Link>
-                <Link
-                  to="/resume"
-                  className="inline-flex items-center px-6 py-3 border-2 border-cream text-cream font-semibold text-sm tracking-wide hover:bg-cream hover:text-navy transition-colors"
-                >
-                  VIEW RESUME
-                </Link>
-              </div>
-
-              {/* System status panel */}
-              <div className="reveal opacity-0 mt-10 p-4 border border-cream/10 bg-white/50">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="font-mono text-xs text-cream">SYSTEM ONLINE</span>
-                </div>
-                <div className="font-mono text-xs text-cream/60 space-y-1">
-                  <p>AI / DATA / VISION</p>
-                  <p>COIMBATORE, IN</p>
-                  <p>BUILDING: 2023 → PRESENT</p>
-                </div>
-              </div>
+    <div>
+      <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6">
+        <div className="container-wide grid lg:grid-cols-[1.1fr_.9fr] gap-12 lg:gap-16 items-center">
+          <div className="reveal">
+            <div className="inline-flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-3 py-2 font-mono text-[10px] font-bold tracking-[.16em] text-[var(--primary)] mb-6"><span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse" /> WANTED // AI / ML ENGINEER</div>
+            <p className="eyebrow">CHARTING THE GRAND LINE OF INTELLIGENT SYSTEMS</p>
+            <h1 className="text-[clamp(3.4rem,9vw,8rem)] leading-[.82] tracking-[-.07em] font-black max-w-4xl">CHENTHURR<br /><span className="text-[var(--primary)]">C K</span></h1>
+            <h2 className="mt-7 text-xl sm:text-2xl font-black tracking-[.12em]">AI / ML ENGINEER</h2>
+            <p className="mt-5 max-w-2xl text-[var(--muted)] text-base sm:text-lg leading-8">Building intelligent systems and setting them loose on the Grand Line — across machine learning, computer vision, data engineering, and full-stack AI applications.</p>
+            <p className="mt-5 font-mono text-xs text-[var(--ink-soft)]">{profile.headline}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/projects" className="btn-primary">Explore My Voyage →</Link>
+              <Link to="/resume" className="btn-ghost">View Resume</Link>
             </div>
-
-            {/* RIGHT: Portrait */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <div className="reveal opacity-0 relative">
-                {/* Technical frame */}
-                <div className="relative border-2 border-cream/20 p-2">
-                  <div className="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-mustard" />
-                  <div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-mustard" />
-                  <div className="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-mustard" />
-                  <div className="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-mustard" />
-
-                  <div className="w-full max-w-md aspect-[2/3] overflow-hidden bg-navy-light">
-                    <img
-                      src={portraitSrc}
-                      alt="Illustrated portrait of Chenthurr C K"
-                      className="w-full h-full object-cover object-top"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  </div>
-
-                  {/* Metadata overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 bg-navy/90 text-cream p-3 font-mono text-xs">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-mustard">[ PORTRAIT / SUBJECT ]</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-cream/70">
-                      <span>STATUS: ONLINE</span>
-                      <span>ROLE: AI / ML ENGINEER</span>
-                      <span>LOCATION: COIMBATORE, IN</span>
-                      <span>FOCUS: AI · DATA · VISION</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating skill card */}
-                <div className="absolute -left-8 top-1/4 bg-navy-light border border-cream/10 p-3 shadow-lg hidden lg:block">
-                  <p className="font-mono text-xs text-cream font-bold mb-2">SYSTEM PROFILE</p>
-                  <div className="space-y-1 font-mono text-[10px]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-16 text-cream">Python</span>
-                      <div className="flex gap-0.5">
-                        {[...Array(10)].map((_, i) => (
-                          <div key={i} className={`w-1.5 h-3 ${i < 10 ? 'bg-mustard' : 'bg-white/10'}`} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-16 text-cream">AI / ML</span>
-                      <div className="flex gap-0.5">
-                        {[...Array(10)].map((_, i) => (
-                          <div key={i} className={`w-1.5 h-3 ${i < 9 ? 'bg-mustard' : 'bg-white/10'}`} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-16 text-cream">CV</span>
-                      <div className="flex gap-0.5">
-                        {[...Array(10)].map((_, i) => (
-                          <div key={i} className={`w-1.5 h-3 ${i < 9 ? 'bg-mustard' : 'bg-white/10'}`} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-16 text-cream">Data</span>
-                      <div className="flex gap-0.5">
-                        {[...Array(10)].map((_, i) => (
-                          <div key={i} className={`w-1.5 h-3 ${i < 8 ? 'bg-mustard' : 'bg-white/10'}`} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-5 font-mono text-xs font-bold">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)]">GITHUB ↗</a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)]">LINKEDIN ↗</a>
+              <a href={`mailto:${profile.email}`} className="hover:text-[var(--primary)]">EMAIL ↗</a>
             </div>
           </div>
+          <div className="reveal max-w-[520px] w-full mx-auto lg:ml-auto"><WantedPoster profile={profile} portraitSrc={portraitSrc} /></div>
         </div>
       </section>
 
-      {/* SHORT ABOUT PREVIEW */}
-      <section className="py-20 bg-navy-light">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-cream mb-6">ABOUT ME</h2>
-          <p className="text-cream/80 text-lg leading-relaxed mb-8">
-            {profile.about}
-          </p>
-          <Link
-            to="/about"
-            className="inline-flex items-center text-mustard font-semibold hover:text-mustard-dark transition-colors"
-          >
-            READ MORE ABOUT ME →
-          </Link>
+      <section className="px-4 sm:px-6 py-10 border-y border-[var(--border)]">
+        <div className="container-wide flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] font-bold tracking-[.14em]">
+          {['INPUT','DATA','MODEL','SYSTEM','IMPACT'].map((step, i) => <span key={step} className="flex items-center gap-3"><span className={`px-3 py-2 border border-[var(--border)] ${i === 4 ? 'bg-[var(--accent)] text-[var(--text)]' : 'bg-[var(--surface)]'}`}>{step}</span>{i < 4 && <span className="text-[var(--primary)]">→</span>}</span>)}
         </div>
       </section>
 
-      {/* Progress line */}
-      <section className="py-12 bg-navy border-t border-navy-light">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center items-center gap-4 font-mono text-xs text-cream">
-            <span className="px-3 py-1 border border-cream/20">INPUT</span>
-            <span className="text-mustard">→</span>
-            <span className="px-3 py-1 border border-cream/20">DATA</span>
-            <span className="text-mustard">→</span>
-            <span className="px-3 py-1 border border-cream/20">MODEL</span>
-            <span className="text-mustard">→</span>
-            <span className="px-3 py-1 border border-cream/20">SYSTEM</span>
-            <span className="text-mustard">→</span>
-            <span className="px-3 py-1 border border-cream/20 bg-mustard text-navy">IMPACT</span>
+      <section className="page">
+        <div className="container-wide">
+          <div className="section-heading"><div className="section-index"><span>01</span><i /></div><div><p className="eyebrow">CAPTAIN'S LOG</p><h2 className="text-4xl sm:text-5xl font-black tracking-tight">A DEVELOPER ON THE MOVE.</h2></div></div>
+          <div className="grid lg:grid-cols-[1.3fr_.7fr] gap-8 items-start">
+            <p className="text-lg leading-8 text-[var(--muted)]">{profile.about}</p>
+            <div className="paper-card p-5 font-mono text-xs space-y-3"><p className="text-[var(--primary)]">SYSTEM STATUS</p><p>ROLE ........ {profile.role}</p><p>FOCUS ....... AI · DATA · VISION</p><p>EDUCATION ... {profile.education}</p><p>CGPA ........ {profile.cgpa}</p><p>STATUS ...... BUILDING</p></div>
           </div>
+          <Link to="/about" className="inline-flex mt-8 font-mono text-xs font-bold tracking-widest text-[var(--primary)]">READ THE CAPTAIN'S LOG →</Link>
+        </div>
+      </section>
+
+      <section className="px-4 sm:px-6 pb-20">
+        <div className="container-wide">
+          <div className="flex items-end justify-between gap-6 mb-8"><div><p className="eyebrow">VOYAGE LOG</p><h2 className="text-3xl sm:text-4xl font-black">SYSTEMS BUILT DURING THE JOURNEY.</h2></div><Link to="/projects" className="hidden sm:block font-mono text-xs font-bold text-[var(--primary)]">VIEW ALL →</Link></div>
+          <div className="grid md:grid-cols-2 gap-5">{featured.slice(0,2).map((project) => <Link to="/projects" key={project.id} className="paper-card p-6 group hover:-translate-y-1 transition-transform"><div className="flex justify-between gap-4 font-mono text-[10px] text-[var(--primary)]"><span>LOG {project.number}</span><span>{project.category}</span></div><h3 className="mt-5 text-xl font-black group-hover:text-[var(--primary)] transition-colors">{project.name}</h3><p className="mt-3 text-sm leading-6 text-[var(--muted)]">{project.shortDescription}</p><div className="mt-5 flex flex-wrap gap-2">{project.technologies.slice(0,5).map((tech) => <span key={tech} className="tag">{tech}</span>)}</div></Link>)}</div>
         </div>
       </section>
     </div>
