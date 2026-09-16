@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { DataProvider } from './components/DataContext';
 import CustomCursor from './components/CustomCursor';
 import Navigation from './components/Navigation';
@@ -17,37 +18,15 @@ import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import { useData } from './components/DataContext';
 
-function AppContent() {
-  const { settings } = useData();
-  return (
-    <div className="site-shell">
-      <LoadingScreen />
-      <AnimatedBackground />
-      <CustomCursor />
-      <Navigation />
-      <main className="site-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/certifications" element={<Certifications />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </main>
-      <Footer settings={settings} />
-    </div>
-  );
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); }, [pathname]);
+  return null;
 }
 
-export default function App() {
-  return (
-    <DataProvider>
-      <AppContent />
-    </DataProvider>
-  );
+function AppContent() {
+  const { settings } = useData();
+  return <div className="site-shell"><ScrollToTop /><LoadingScreen /><AnimatedBackground /><CustomCursor /><Navigation /><main className="site-content"><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/projects" element={<Projects />} /><Route path="/skills" element={<Skills />} /><Route path="/experience" element={<Experience />} /><Route path="/achievements" element={<Achievements />} /><Route path="/certifications" element={<Certifications />} /><Route path="/resume" element={<Resume />} /><Route path="/contact" element={<Contact />} /><Route path="/admin" element={<Admin />} /></Routes></main><Footer settings={settings} /></div>;
 }
+
+export default function App() { return <DataProvider><AppContent /></DataProvider>; }
