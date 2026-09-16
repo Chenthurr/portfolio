@@ -1,129 +1,22 @@
 import { useData } from '../components/DataContext';
-import { useEffect, useRef } from 'react';
+import SectionHeading from '../components/SectionHeading';
 
 export default function About() {
   const { profile, education, portraitDataUrl } = useData();
-  const sectionRef = useRef(null);
   const portraitSrc = portraitDataUrl || profile.portrait;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.reveal');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={sectionRef} className="pt-24 pb-20 bg-navy min-h-screen">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
-        <div className="reveal opacity-0 mb-16">
-          <span className="font-mono text-xs text-mustard tracking-widest">01 / SYSTEM PROFILE</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-cream mt-2">ABOUT</h1>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Left: Profile info */}
-          <div>
-            <div className="reveal opacity-0 grid grid-cols-2 gap-6 mb-10">
-              <div className="p-4 border border-cream/10 bg-navy-light">
-                <p className="font-mono text-xs text-mustard mb-1">ROLE</p>
-                <p className="font-semibold text-cream">{profile.role}</p>
-              </div>
-              <div className="p-4 border border-cream/10 bg-navy-light">
-                <p className="font-mono text-xs text-mustard mb-1">EDUCATION</p>
-                <p className="font-semibold text-cream">{profile.education}</p>
-              </div>
-              <div className="p-4 border border-cream/10 bg-navy-light">
-                <p className="font-mono text-xs text-mustard mb-1">CGPA</p>
-                <p className="font-semibold text-cream">{profile.cgpa}</p>
-              </div>
-              <div className="p-4 border border-cream/10 bg-navy-light">
-                <p className="font-mono text-xs text-mustard mb-1">LOCATION</p>
-                <p className="font-semibold text-cream">{profile.location}</p>
-              </div>
-            </div>
-
-            <div className="reveal opacity-0 mb-10">
-              <p className="font-mono text-xs text-mustard mb-2">FOCUS</p>
-              <p className="text-cream font-medium">{profile.focus}</p>
-            </div>
-
-            <div className="reveal opacity-0 p-6 border-l-4 border-mustard bg-navy-light">
-              <p className="text-cream leading-relaxed">{profile.about}</p>
-            </div>
-
-            {/* Engineering DNA */}
-            <div className="reveal opacity-0 mt-10">
-              <p className="font-mono text-xs text-mustard mb-4">ENGINEERING DNA</p>
-              <div className="flex flex-col items-start gap-3">
-                {['PYTHON', 'DATA', 'MODELS', 'APIs', 'APPLICATIONS'].map((item, i) => (
-                  <div key={item} className="flex items-center gap-4">
-                    <div className="px-4 py-2 bg-navy text-cream font-mono text-sm font-semibold">
-                      {item}
-                    </div>
-                    {i < 4 && (
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-mustard">
-                        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="2" />
-                      </svg>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Portrait + Education */}
-          <div>
-            <div className="reveal opacity-0 mb-10">
-              <div className="border-2 border-cream/20 p-2 relative">
-                <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-mustard" />
-                <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-mustard" />
-                <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-mustard" />
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-mustard" />
-                <div className="w-full aspect-[2/3] overflow-hidden bg-navy-light">
-                  <img
-                    src={portraitSrc}
-                    alt="Illustrated portrait of Chenthurr C K"
-                    className="w-full h-full object-cover object-top"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="reveal opacity-0">
-              <p className="font-mono text-xs text-mustard mb-4">EDUCATION</p>
-              <div className="space-y-4">
-                {education.map((edu) => (
-                  <div key={edu.id} className="p-4 border border-cream/10 bg-navy-light">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold text-cream">{edu.degree}</h3>
-                      <span className="font-mono text-xs text-mustard">{edu.years}</span>
-                    </div>
-                    <p className="text-sm text-cream/70">{edu.institution}</p>
-                    {edu.affiliation && (
-                      <p className="text-xs text-cream/50 mt-1">{edu.affiliation}</p>
-                    )}
-                    {edu.cgpa && (
-                      <p className="text-xs font-mono text-mustard mt-2">CGPA: {edu.cgpa}</p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+  const facts = [
+    ['IDENTITY', profile.name], ['MISSION', profile.headline], ['SPECIALIZATION', profile.focus],
+    ['EDUCATION', profile.education], ['CURRENT STATUS', 'FINAL-YEAR STUDENT'], ['LOCATION', profile.location],
+  ];
+  return <div className="page"><div className="container-wide">
+    <SectionHeading index={1} eyebrow="THE CAPTAIN'S LOG" title="ABOUT" description="A practical record of the engineer, the education behind the work, and the systems-first mindset." />
+    <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
+      <div className="paper-card p-3 rotate-[-1deg]"><img src={portraitSrc} alt="Portrait of Chenthurr C K" className="w-full aspect-[4/5] object-cover object-top" /></div>
+      <div>
+        <div className="grid sm:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)]">{facts.map(([label,value]) => <div key={label} className="bg-[var(--surface)] p-5 min-h-28"><p className="eyebrow">{label}</p><p className="font-bold leading-6">{value}</p></div>)}</div>
+        <div className="mt-8 paper-card p-6 border-l-4 border-l-[var(--primary)]"><p className="font-mono text-xs text-[var(--primary)] mb-3">LOG ENTRY / ENGINEERING DNA</p><p className="text-[var(--muted)] leading-8">{profile.about}</p></div>
       </div>
     </div>
-  );
+    <div className="mt-16"><p className="eyebrow">EDUCATION / NAVIGATION CHART</p><div className="grid md:grid-cols-2 gap-5">{education.map((edu) => <article key={edu.id} className="paper-card p-6"><div className="flex justify-between gap-4"><span className="font-mono text-xs text-[var(--primary)]">{edu.years}</span>{edu.cgpa && <strong className="font-mono text-xs text-[var(--primary)]">{edu.cgpa}</strong>}</div><h2 className="mt-5 text-xl font-black">{edu.degree}</h2><p className="mt-3 text-sm text-[var(--muted)]">{edu.institution}</p>{edu.affiliation && <p className="mt-2 text-xs text-[var(--muted)]">{edu.affiliation}</p>}</article>)}</div></div>
+  </div></div>;
 }
