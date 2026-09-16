@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { DataProvider } from './components/DataContext';
 import CustomCursor from './components/CustomCursor';
 import Navigation from './components/Navigation';
@@ -17,10 +18,19 @@ import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import { useData } from './components/DataContext';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+  return null;
+}
+
 function AppContent() {
   const { settings } = useData();
   return (
     <div className="site-shell">
+      <ScrollToTop />
       <LoadingScreen />
       <AnimatedBackground />
       <CustomCursor />
@@ -45,9 +55,5 @@ function AppContent() {
 }
 
 export default function App() {
-  return (
-    <DataProvider>
-      <AppContent />
-    </DataProvider>
-  );
+  return <DataProvider><AppContent /></DataProvider>;
 }
