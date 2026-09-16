@@ -1,0 +1,31 @@
+export function StrawHat({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+      <path d="M27 102c24-14 52-20 93-20s69 6 93 20c-28 17-61 24-93 24s-65-7-93-24Z" fill="#F2A51A" stroke="#7B3F12" strokeWidth="4" />
+      <path d="M47 88c10-31 33-47 73-47s63 16 73 47c-22 8-46 12-73 12s-51-4-73-12Z" fill="#FFD86B" stroke="#7B3F12" strokeWidth="4" />
+      <path d="M48 77c22 6 46 9 72 9s50-3 72-9v18c-22 8-46 11-72 11s-50-3-72-11Z" fill="#D71935" stroke="#7B3F12" strokeWidth="4" />
+      <path d="M72 56c11-7 27-10 48-10s37 3 48 10" fill="none" stroke="#E7A92D" strokeWidth="3" opacity=".8" />
+      <path d="M37 105c29 10 57 14 83 14s54-4 83-14" fill="none" stroke="#E7A92D" strokeWidth="3" opacity=".8" />
+      <path d="M87 51c5-8 9-12 14-16M108 43c3-9 5-13 8-17M132 43c-1-9-1-13-3-17M151 50c-3-8-6-12-10-16" stroke="#8A541B" strokeWidth="2.2" strokeLinecap="round" opacity=".55" />
+    </svg>
+  );
+}
+
+export function Emblem({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+      <g stroke="#F5F5F5" strokeWidth="13" strokeLinecap="round">
+        <path d="M58 58 25 25M162 58l33-33M58 162l-33 33M162 162l33 33" />
+      </g>
+      <g fill="#F5F5F5" stroke="#111" strokeWidth="4">
+        <circle cx="25" cy="25" r="11" /><circle cx="195" cy="25" r="11" /><circle cx="25" cy="195" r="11" /><circle cx="195" cy="195" r="11" />
+      </g>
+      <path d="M71 91c5-34 29-51 39-51s34 17 39 51v53c-9 16-22 24-39 24s-30-8-39-24Z" fill="#FEFEFE" />
+      <path d="M67 83c9-22 23-33 43-33s34 11 43 33c-13 7-27 10-43 10s-30-3-43-10Z" fill="#FFCE00" stroke="#111" strokeWidth="4" />
+      <path d="M64 84h92v19H64z" fill="#D71935" stroke="#111" strokeWidth="4" />
+      <circle cx="91" cy="117" r="14" fill="#111" stroke="none" /><circle cx="129" cy="117" r="14" fill="#111" stroke="none" />
+      <path d="M87 145c9 9 37 9 46 0M91 154v12M103 151v15M116 151v15M129 154v12" fill="none" stroke="#111" strokeWidth="3" />
+      <path d="M80 139c10 10 50 10 60 0" fill="none" stroke="#111" strokeWidth="3" />
+    </svg>
+  );
+}
