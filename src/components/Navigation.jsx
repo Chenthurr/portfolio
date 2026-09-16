@@ -22,28 +22,28 @@ export default function Navigation() {
   useEffect(() => setMobileOpen(false), [location.pathname]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass shadow-sm' : 'bg-transparent'}`} aria-label="Primary navigation">
-      <div className="container-wide px-4 sm:px-6 py-4 flex items-center justify-between gap-5">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileOpen ? 'glass shadow-sm' : 'bg-transparent'}`} aria-label="Primary navigation">
+      <div className="container-wide px-4 sm:px-6 py-3.5 flex items-center justify-between gap-5">
         <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Chenthurr C K home">
-          <span className="w-8 h-8 grid place-items-center rounded-full border border-[var(--primary)] text-[var(--accent)] font-black">C</span>
+          <span className="w-9 h-9 grid place-items-center rounded-full border-2 border-[var(--primary)] text-[var(--accent)] font-black">C</span>
           <span className="hidden sm:block font-black tracking-tight text-sm">CHENTHURR.CK</span>
         </Link>
-        <div className="hidden xl:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-5">
           {navLinks.map((link) => <Link key={link.to} to={link.to} className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}>{link.label}</Link>)}
           <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="nav-link">GITHUB ↗</a>
           <ThemeToggle />
         </div>
         <div className="flex xl:hidden items-center gap-2">
           <ThemeToggle />
-          <button className="w-10 h-10 grid place-items-center border border-[var(--border)]" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
-            <span className="text-lg" aria-hidden="true">{mobileOpen ? '×' : '≡'}</span>
+          <button type="button" className="w-10 h-10 grid place-items-center border border-[var(--border)]" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <span className="text-xl leading-none" aria-hidden="true">{mobileOpen ? '×' : '☰'}</span>
           </button>
         </div>
       </div>
       {mobileOpen && <div className="xl:hidden glass border-t border-[var(--border)]">
-        <div className="container-wide px-5 py-5 grid gap-4 max-h-[75vh] overflow-y-auto">
-          {navLinks.map((link) => <Link key={link.to} to={link.to} className={`nav-link text-sm py-1 ${location.pathname === link.to ? 'active' : ''}`}>{link.label}</Link>)}
-          <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="nav-link text-sm py-1">GITHUB ↗</a>
+        <div className="container-wide px-5 py-5 grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-3 max-h-[72vh] overflow-y-auto">
+          {navLinks.map((link) => <Link key={link.to} to={link.to} className={`nav-link text-xs py-2 ${location.pathname === link.to ? 'active' : ''}`}>{link.label}</Link>)}
+          <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="nav-link text-xs py-2">GITHUB ↗</a>
         </div>
       </div>}
     </nav>
