@@ -6,8 +6,6 @@
 
 **Live Portfolio:** chenthurrck-portfolio.netlify.app
 
-**GitHub Repository:** (https://github.com/Chenthurr/portfolio?utm_source=chatgpt.com)
-
 ## About
 
 I am Chenthurr C K, a B.Tech Artificial Intelligence & Data Science student focused on building practical, production-oriented intelligent systems. My interests include machine learning, computer vision, data engineering, and full-stack AI applications.
