@@ -1,69 +1,8 @@
 import { useData } from '../components/DataContext';
+import SectionHeading from '../components/SectionHeading';
 
 export default function Resume() {
-  const { resumeDataUrl, settings } = useData();
-  const driveUrl = settings?.resumeDriveUrl;
-  // If an admin has uploaded a PDF directly (Admin > Resume), it's embedded inline
-  // and fully downloadable. Otherwise we fall back to the Google Drive link.
-  const hasEmbeddedResume = Boolean(resumeDataUrl);
-  const resumeSrc = resumeDataUrl || driveUrl;
-
-  return (
-    <div className="pt-24 pb-20 bg-navy min-h-screen">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="mb-12">
-          <span className="font-mono text-xs text-mustard tracking-widest">RESUME</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-cream mt-2">CURRICULUM VITAE</h1>
-        </div>
-
-        <div className="bg-navy-light border border-cream/10 p-8 text-center">
-          <p className="text-cream/70 mb-6">
-            View or download my current resume.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href={resumeSrc}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-navy text-cream font-semibold text-sm tracking-wide hover:bg-mustard hover:text-navy transition-colors"
-            >
-              VIEW RESUME
-            </a>
-            <a
-              href={resumeSrc}
-              {...(hasEmbeddedResume ? { download: 'Chenthurr_CK_Resume.pdf' } : { target: '_blank', rel: 'noopener noreferrer' })}
-              className="px-6 py-3 border-2 border-cream text-cream font-semibold text-sm tracking-wide hover:bg-cream hover:text-navy transition-colors"
-            >
-              DOWNLOAD RESUME
-            </a>
-          </div>
-          {!hasEmbeddedResume && (
-            <p className="text-xs text-cream/40 mt-4 font-mono">
-              Opens the resume in Google Drive. Sign in as admin to upload a PDF for an inline preview instead.
-            </p>
-          )}
-        </div>
-
-        {hasEmbeddedResume ? (
-          <div className="mt-8 bg-navy-light border border-cream/10 p-4 h-[800px]">
-            <iframe
-              src={resumeSrc}
-              title="Resume"
-              className="w-full h-full"
-              style={{ border: 'none' }}
-            />
-          </div>
-        ) : (
-          <div className="mt-8 bg-navy-light border border-cream/10 p-4 h-[800px]">
-            <iframe
-              src={`https://drive.google.com/embeddedfolderview?id=${(driveUrl || '').match(/folders\/([^?/]+)/)?.[1] || ''}#list`}
-              title="Resume (Google Drive)"
-              className="w-full h-full"
-              style={{ border: 'none' }}
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  const { settings, resumeDataUrl } = useData();
+  const resumeUrl = resumeDataUrl || settings.resumeDriveUrl;
+  return <div className="page"><div className="container-wide"><SectionHeading index={7} eyebrow="NAVIGATION CHART" title="RESUME" description="A direct route to the current resume, while preserving the existing stored document link." /><div className="max-w-3xl paper-card p-7 sm:p-10"><div className="flex flex-wrap justify-between gap-6"><div><p className="eyebrow">DOCUMENT / CHENTHURR C K</p><h2 className="text-3xl font-black">CAREER LOG</h2><p className="mt-3 text-[var(--muted)]">AI / ML Engineer</p></div><div className="font-mono text-right text-xs"><p>STATUS</p><p className="text-[var(--primary)] mt-1">READY TO OPEN</p></div></div><div className="mt-10 grid sm:grid-cols-2 gap-3"><a className="btn-primary" href={resumeUrl} target="_blank" rel="noopener noreferrer">View Resume ↗</a><a className="btn-ghost" href={resumeUrl} target="_blank" rel="noopener noreferrer" download>Download</a></div><p className="mt-6 text-xs text-[var(--muted)]">The resume destination is read from the site's existing settings/data model.</p></div></div></div>;
 }
