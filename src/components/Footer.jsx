@@ -1,27 +1,5 @@
 import { Link } from 'react-router-dom';
 
 export default function Footer({ settings }) {
-  return (
-    <footer className="bg-navy text-cream py-12">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div>
-            <h3 className="font-bold text-lg">CHENTHURR C K</h3>
-            <p className="text-sm text-cream/60 mt-1">AI / ML · DATA · COMPUTER VISION · SOFTWARE</p>
-          </div>
-          <div className="flex gap-6 text-sm">
-            <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="hover:text-mustard transition-colors">
-              GitHub ↗
-            </a>
-            <a href="https://linkedin.com/in/chenthurr-c-k-901ab0289/" target="_blank" rel="noopener noreferrer" className="hover:text-mustard transition-colors">
-              LinkedIn ↗
-            </a>
-          </div>
-        </div>
-        <div className="mt-8 pt-8 border-t border-cream/10 text-xs text-cream/40">
-          {settings?.footerText || '© 2026 CHENTHURR C K'}
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="site-content border-t border-[var(--border)] px-4 sm:px-6 py-12"><div className="container-wide"><div className="flex flex-col sm:flex-row justify-between gap-8"><div><p className="eyebrow">END OF LOG</p><p className="text-2xl font-black">CHENTHURR C K</p><p className="mt-1 font-mono text-xs text-[var(--muted)]">AI / ML ENGINEER</p></div><div className="flex flex-wrap gap-x-5 gap-y-3 items-start font-mono text-[10px] font-bold"><Link to="/projects" className="hover:text-[var(--primary)]">VOYAGE</Link><Link to="/resume" className="hover:text-[var(--primary)]">RESUME</Link><Link to="/contact" className="hover:text-[var(--primary)]">CONTACT</Link><a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)]">GITHUB ↗</a></div></div><div className="mt-10 pt-5 border-t border-[var(--border)] flex flex-wrap justify-between gap-3 font-mono text-[10px] text-[var(--muted)]"><span>{settings?.footerText || '© 2026 CHENTHURR C K'}</span><span>DATA · MODELS · CODE · APPLICATIONS</span></div></div></footer>;
 }
