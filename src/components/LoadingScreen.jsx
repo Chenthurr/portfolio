@@ -1,19 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Emblem, StrawHat } from './OnePieceArt';
 
 const STORAGE_KEY = 'ck-loading-seen';
-
-function Emblem() {
-  return (
-    <div className="loader-emblem" aria-hidden="true">
-      <svg viewBox="0 0 120 120" role="presentation">
-        <circle cx="60" cy="60" r="49" className="loader-ring" />
-        <path d="M28 49c8-8 18-12 32-12s24 4 32 12M34 66c8 7 17 11 26 11s18-4 26-11" className="loader-hat" />
-        <path d="M23 55c12 7 27 10 37 10s25-3 37-10" className="loader-band" />
-        <circle cx="60" cy="60" r="4" className="loader-core" />
-      </svg>
-    </div>
-  );
-}
 
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(() => {
@@ -26,24 +14,23 @@ export default function LoadingScreen() {
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
       setProgress(100);
-      const t = window.setTimeout(() => setVisible(false), 180);
+      const t = window.setTimeout(() => setVisible(false), 160);
       return () => window.clearTimeout(t);
     }
     const started = performance.now();
     let raf;
+    let closeTimer;
     const tick = (now) => {
-      const elapsed = now - started;
-      const next = Math.min(100, Math.round((elapsed / 1250) * 100));
+      const next = Math.min(100, Math.round(((now - started) / 1350) * 100));
       setProgress(next);
       if (next < 100) raf = requestAnimationFrame(tick);
       else {
         try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch {}
-        window.setTimeout(() => setVisible(false), 220);
+        closeTimer = window.setTimeout(() => setVisible(false), 260);
       }
     };
     raf = requestAnimationFrame(tick);
-    const fallback = window.setTimeout(() => setVisible(false), 1900);
-    return () => { cancelAnimationFrame(raf); window.clearTimeout(fallback); };
+    return () => { cancelAnimationFrame(raf); window.clearTimeout(closeTimer); };
   }, [visible]);
 
   if (!visible) return null;
@@ -51,7 +38,11 @@ export default function LoadingScreen() {
   return (
     <div className="loading-screen" role="status" aria-live="polite" aria-label="Loading portfolio">
       <div className="loader-atmosphere" />
-      <Emblem />
+      <div className="loader-sea-lines" aria-hidden="true" />
+      <div className="loader-visual">
+        <div className="loader-emblem-wrap"><Emblem className="loader-emblem" /></div>
+        <StrawHat className="loader-hat-orbit" />
+      </div>
       <div className="loader-copy">
         <span>SETTING SAIL...</span>
         <small>ENTERING THE GRAND LINE</small>
