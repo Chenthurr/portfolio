@@ -1,5 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ThemeToggle from './ThemeToggle';
+
+const navLinks = [
+  { to: '/', label: 'HOME' }, { to: '/about', label: 'ABOUT' }, { to: '/projects', label: 'VOYAGE' },
+  { to: '/skills', label: 'SKILLS' }, { to: '/experience', label: 'EXPERIENCE' },
+  { to: '/achievements', label: 'ACHIEVEMENTS' }, { to: '/certifications', label: 'CERTS' },
+  { to: '/resume', label: 'RESUME' }, { to: '/contact', label: 'CONTACT' },
+];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -7,102 +15,37 @@ export default function Navigation() {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 28);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location]);
-
-  const navLinks = [
-    { to: '/', label: 'HOME' },
-    { to: '/about', label: 'ABOUT' },
-    { to: '/projects', label: 'PROJECTS' },
-    { to: '/skills', label: 'SKILLS' },
-    { to: '/experience', label: 'EXPERIENCE' },
-    { to: '/achievements', label: 'ACHIEVEMENTS' },
-    { to: '/resume', label: 'RESUME' },
-    { to: '/contact', label: 'CONTACT' },
-  ];
+  useEffect(() => setMobileOpen(false), [location.pathname]);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-navy/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="font-bold text-cream text-lg tracking-tight">
-          CHENTHURR.CK
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass shadow-sm' : 'bg-transparent'}`} aria-label="Primary navigation">
+      <div className="container-wide px-4 sm:px-6 py-4 flex items-center justify-between gap-5">
+        <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Chenthurr C K home">
+          <span className="w-8 h-8 grid place-items-center rounded-full border border-[var(--primary)] text-[var(--accent)] font-black">C</span>
+          <span className="hidden sm:block font-black tracking-tight text-sm">CHENTHURR.CK</span>
         </Link>
-
-        {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-xs font-semibold tracking-widest transition-colors ${
-                location.pathname === link.to ? 'text-mustard' : 'text-cream hover:text-mustard'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href="https://github.com/Chenthurr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-semibold tracking-widest text-cream hover:text-mustard transition-colors"
-          >
-            GITHUB ↗
-          </a>
+        <div className="hidden xl:flex items-center gap-6">
+          {navLinks.map((link) => <Link key={link.to} to={link.to} className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}>{link.label}</Link>)}
+          <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="nav-link">GITHUB ↗</a>
+          <ThemeToggle />
         </div>
-
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden text-cream"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {mobileOpen ? (
-              <path d="M18 6L6 18M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
-        </button>
+        <div className="flex xl:hidden items-center gap-2">
+          <ThemeToggle />
+          <button className="w-10 h-10 grid place-items-center border border-[var(--border)]" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <span className="text-lg" aria-hidden="true">{mobileOpen ? '×' : '≡'}</span>
+          </button>
+        </div>
       </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-navy/95 backdrop-blur-md border-t border-navy-light">
-          <div className="px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-semibold tracking-widest ${
-                  location.pathname === link.to ? 'text-mustard' : 'text-cream'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href="https://github.com/Chenthurr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold tracking-widest text-cream"
-            >
-              GITHUB ↗
-            </a>
-          </div>
+      {mobileOpen && <div className="xl:hidden glass border-t border-[var(--border)]">
+        <div className="container-wide px-5 py-5 grid gap-4 max-h-[75vh] overflow-y-auto">
+          {navLinks.map((link) => <Link key={link.to} to={link.to} className={`nav-link text-sm py-1 ${location.pathname === link.to ? 'active' : ''}`}>{link.label}</Link>)}
+          <a href="https://github.com/Chenthurr" target="_blank" rel="noopener noreferrer" className="nav-link text-sm py-1">GITHUB ↗</a>
         </div>
-      )}
+      </div>}
     </nav>
   );
 }
