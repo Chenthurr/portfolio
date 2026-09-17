@@ -97,13 +97,6 @@ portfolio/
 └── vite.config.js
 ```
 
-## Contact
-
-For professional opportunities, collaborations, or project discussions, please connect through the contact details available on the portfolio.
-
-- **GitHub:** urlChenthurrhttps://github.com/Chenthurr
-- **LinkedIn:** urlChenthurr C K on LinkedInhttps://linkedin.com/in/chenthurr-c-k-901ab0289/
-
 ## License
 
 This repository contains my personal portfolio and project presentation. Please do not reproduce the portfolio design, personal information, or content as your own.
